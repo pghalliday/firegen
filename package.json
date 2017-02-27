@@ -6,12 +6,22 @@
   "scripts": {
     "cmd:lint": "eslint .",
     "cmd:test": "cross-env NODE_ENV=test nyc mocha",
-    "cmd:build": "babel src --out-dir lib",
+    "cmd:coverage": "nyc report && nyc check-coverage",
+    "cmd:build": "rimraf lib && babel src --out-dir lib",
     "cmd:coveralls": "cat ./coverage/lcov.info | coveralls",
-    "test": "run-s cmd:lint cmd:test",
+    "test": "run-s cmd:lint cmd:test cmd:coverage",
     "build": "run-s test cmd:build",
     "ci": "run-s build cmd:coveralls",
-    "watch": "chokidar '+(src|test)/**/*' -c 'npm run -s build'"
+    "alarmist:lint": "alarmist-job -n lint run-s cmd:lint",
+    "alarmist:test": "alarmist-job -n test run-s cmd:test",
+    "alarmist:coverage": "alarmist-job -n coverage run-s cmd:coverage",
+    "alarmist:build": "alarmist-job -n build run-s cmd:build",
+    "watch:lint": "chokidar '+(src|test)/**/*' -c 'run-s alarmist:lint'",
+    "watch:test": "chokidar '+(src|test)/**/*' -c 'run-s -c alarmist:test alarmist:coverage'",
+    "watch:build": "chokidar 'src/**/*' -c 'run-s alarmist:build'",
+    "watch:alarmist": "run-p watch:lint watch:test watch:build",
+    "start": "alarmist-monitor run-s watch:alarmist",
+    "watch": "chokidar '+(src|test)/**/*' -c 'run-s build'"
   },
   "repository": {
     "type": "git",
@@ -25,6 +35,7 @@
   },
   "homepage": "https://github.com/pghalliday/firegen#readme",
   "devDependencies": {
+    "alarmist": "^1.0.4",
     "babel-cli": "^6.22.2",
     "babel-plugin-istanbul": "^3.1.2",
     "babel-preset-env": "^1.1.8",
@@ -36,6 +47,7 @@
     "eslint-config-google": "^0.7.1",
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
-    "nyc": "^10.1.2"
+    "nyc": "^10.1.2",
+    "rimraf": "^2.6.1"
   }
 }
