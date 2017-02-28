@@ -1,6 +1,6 @@
 /.temp/
 /.alarmist/
-/npm-debug.log
+/npm-debug.log*
 /node_modules/
 /coverage/
 /.nyc_output/
