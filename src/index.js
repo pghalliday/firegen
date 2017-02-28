@@ -1,3 +1,9 @@
-export default function() {
-  return 'hello world';
+import {
+  init,
+  generate,
+} from './firegen';
+
+export default {
+  init,
+  generate,
 };

@@ -2,6 +2,10 @@
   "name": "firegen",
   "version": "1.0.0",
   "description": "Generate database rules and JavaScript APIs for Firebase projects",
+  "bin": {
+    "firegen-init": "bin/init.js",
+    "firegen": "bin/index.js"
+  },
   "main": "lib/index.js",
   "scripts": {
     "cmd:lint": "eslint .",
@@ -34,6 +38,11 @@
     "url": "https://github.com/pghalliday/firegen/issues"
   },
   "homepage": "https://github.com/pghalliday/firegen#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "es6-promisify": "^5.0.0",
+    "mkdirp": "^0.5.1"
+  },
   "devDependencies": {
     "alarmist": "^1.0.4",
     "babel-cli": "^6.22.2",
@@ -48,6 +57,8 @@
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
     "nyc": "^10.1.2",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
   }
 }

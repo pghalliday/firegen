@@ -1,10 +1,7 @@
-import test from '../../src/index.js';
-import chai from 'chai';
+import firegen from '../../src';
 
-chai.should();
-
-describe('test', () => {
-  it('should pass', () => {
-    test().should.eql('hello world');
+describe('index', () => {
+  it('should export firegen', () => {
+    firegen.should.be.ok;
   });
 });

@@ -16,7 +16,7 @@ npm install --save-dev firegen
 Initialise an API definition file and config file
 
 ```
-./node_modules/.bin/firegen init
+./node_modules/.bin/firegen-init
 ```
 
 Using the defaults this will create the following files and directories
